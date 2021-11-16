@@ -19,17 +19,17 @@ class Dvdimage:
     """Represents a Dvdimage on screen
     Attributes:
         x, y: coordinates of top-left corner
-        width: width of our rectangle in px
-        height: height of our rectangle in px
-        colour: 3-tuple of (r, g, b)
+        width: width of image in pixel
+        height: height of image in pixel
+        img: visual representation fo our Dvdimage
         x-vel: x velocity in px/sec
         y-vel: y velocity in px/sec
     """
     def __init__(self):
         self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        self.width = 150
-        self.height = 90
-        self.colour = RED
+        self.width = 180
+        self.height = 180
+        self.img = pygame.image.load("./DVD_IMAGE/dvdimage.png")
         self.x_vel = 5
         self.y_vel = 5
 
@@ -90,7 +90,8 @@ def main() -> None:
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
 
-        pygame.draw.rect(screen, dvd_image.colour, dvd_image.rect())
+        #blit takes two things(<Surface/image>, coords)
+        screen.blit(dvd_image.img, (dvd_image.x, dvd_image.y))
 
         # Update the screen
         pygame.display.flip()
