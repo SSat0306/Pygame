@@ -1,4 +1,3 @@
-
 import pygame
 
 pygame.init()
@@ -32,7 +31,7 @@ class Dvdimage:
         self.height = 90
         self.colour = RED
         self.x_vel = 5
-        self.y_vel = 0
+        self.y_vel = 5
 
     def rect(self) -> pygame.rect:
         """Returns a pygame.rect that represents the dvd_image"""
@@ -53,7 +52,16 @@ class Dvdimage:
             #Set the velocity to the negative
             self.x_vel = -self.x_vel
         # Update the y-coordinate
+
         self.y += self.y_vel
+        if self.y < 0:
+            self.y = 0
+            self.y_vel = -self.y_vel
+        if self.y + self.height > SCREEN_HEIGHT:
+            #Keep the object inside the canvas
+            self.y = SCREEN_HEIGHT - self.height
+            #Set the velocity to the negative
+            self.y_vel = -self.y_vel
 
 
 def main() -> None:
