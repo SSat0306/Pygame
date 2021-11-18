@@ -1,3 +1,4 @@
+
 import random
 import pygame
 
@@ -8,39 +9,36 @@ BLACK = (  0,   0,   0)
 RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
-BGCOLOUR = (100, 100, 255)
+BGCOLOUR = BLACK
 
-SCREEN_WIDTH  = 1824
+SCREEN_WIDTH  = 1024
 SCREEN_HEIGHT = 768
 SCREEN_SIZE   = (SCREEN_WIDTH, SCREEN_HEIGHT)
-WINDOW_TITLE  = "<<Snow Scape>>"
+WINDOW_TITLE  = "Relaxing Snowscape"
 
 
-class Snowscape:
-    """
-    attributes:
-            coordinates(x,y)
-            #Size: how big the snow is(radius
-            #Velocity: falling velocity in px/sec
-
+class Snowflake:
+    """Snowflake on the screen
+    Attributes:
+        size: radius of snowflake in px
+        coords: {x: int, y:int}
+        y_vel: falling velocity in px/sec
+        colour: (r, g, b)
     """
     def __init__(self):
-
         self.size = 2
+        # randomly place the snow on the screen
         self.coords = [
-            (random.randrange(0,SCREEN_WIDTH)),
-            (random.randrange(0,SCREEN_HEIGHT))
+            random.randrange(0, SCREEN_WIDTH),
+            random.randrange(0, SCREEN_HEIGHT)
         ]
-        self.y_vel = 4
+        self.y_vel = 2
         self.colour = WHITE
 
-    def update(self) -> None:
-        """Updates the Snowscape with every tick"""
-        # Update the x-coordinate
-        self.x += self.x_vel
-        # Update the y-coordinate
-        self.y += self.y_vel
-
+    def update(self):
+        """Update the location of the snow"""
+        # Changes the y portion of the coords
+        self.coords[1] += self.y_vel
 
 
 def main() -> None:
@@ -53,7 +51,8 @@ def main() -> None:
     done = False
     clock = pygame.time.Clock()
 
-    snow = Snowscape
+    # Create one snowflake
+    snow = Snowflake()
 
     # ----------- MAIN LOOP
     while not done:
@@ -63,12 +62,13 @@ def main() -> None:
                 done = True
 
         # ----------- CHANGE ENVIRONMENT
+        snow.update()
 
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)      # fill with bgcolor
 
-        #Draw the snowflake
-        pygame.draw.circle(screen, snow.clour, snow.coords, snow.size)
+        # draw the snowflake
+        pygame.draw.circle(screen, snow.colour, snow.coords, snow.size)
 
         # Update the screen
         pygame.display.flip()
