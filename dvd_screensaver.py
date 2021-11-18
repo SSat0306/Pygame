@@ -26,8 +26,7 @@ class Dvdimage:
         y-vel: y velocity in px/sec
     """
 
-    #Size: how big the snow is
-    #Velocity = Speed of snow
+
     def __init__(self):
         self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.width = 180
