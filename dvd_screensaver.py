@@ -9,8 +9,8 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 BGCOLOUR = (100, 100, 255)
 
-SCREEN_WIDTH  = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH  = 960
+SCREEN_HEIGHT = 540
 SCREEN_SIZE   = (SCREEN_WIDTH, SCREEN_HEIGHT)
 WINDOW_TITLE  = "DVD Screen Saver"
 
@@ -25,6 +25,9 @@ class Dvdimage:
         x-vel: x velocity in px/sec
         y-vel: y velocity in px/sec
     """
+
+    #Size: how big the snow is
+    #Velocity = Speed of snow
     def __init__(self):
         self.x, self.y = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         self.width = 180
@@ -74,6 +77,9 @@ def main() -> None:
     done = False
     clock = pygame.time.Clock()
     dvd_image = Dvdimage()
+    bg_image = pygame.image.load('DVD_IMAGE/background_image.jpg')
+    #Transform the image
+    bg_image = pygame.transform.scale(bg_image,(980,540))
 
     # ----------- MAIN LOOP
     while not done:
@@ -88,7 +94,8 @@ def main() -> None:
 
 
         # ----------- DRAW THE ENVIRONMENT
-        screen.fill(BGCOLOUR)      # fill with bgcolor
+        #Draw the background image
+        screen.blit(bg_image, (0, 0))
 
         #blit takes two things(<Surface/image>, coords)
         screen.blit(dvd_image.img, (dvd_image.x, dvd_image.y))
